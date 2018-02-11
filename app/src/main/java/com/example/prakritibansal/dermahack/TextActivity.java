@@ -309,7 +309,6 @@ public class TextActivity extends Activity {
                 TextMessage message = new TextMessage(downloadUrl.toString(), "cd", getCurrentTimeStamp());
                 diseaseAPI(downloadUrl.toString());
                 addMessage(message);
-                progressBar.setVisibility(View.INVISIBLE);
                 Log.i(TAG, "onSuccess: " + downloadUrl);
             }
         });
@@ -361,8 +360,7 @@ public class TextActivity extends Activity {
                         addMessage(new TextMessage("DISEASE\n" + items.getString("disease_name"), "rx", getCurrentTimeStamp()));
                         addMessage(new TextMessage("TREATMENT\n" + items.getString("treatment_info"), "rx", getCurrentTimeStamp()));
                     }
-
-
+                    progressBar.setVisibility(View.INVISIBLE);
 
                 } catch (JSONException e) {
                     // JSON error
