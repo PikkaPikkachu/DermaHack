@@ -8,6 +8,14 @@
     android:paddingTop="10dp"
     android:background ="#FFFFFF">
 
+    <ProgressBar
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true"
+        android:visibility="invisible"
+        android:id="@+id/progressBar" />
+
     <include layout="@layout/text_response_content" />
 
 </RelativeLayout>
