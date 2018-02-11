@@ -51,23 +51,9 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.annotation.NonNull;
-import android.support.design.widget.FloatingActionButton;
 import android.support.v4.content.FileProvider;
-import android.support.v7.app.AlertDialog;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
-import android.text.Editable;
-import android.text.TextWatcher;
-import android.util.Log;
-import android.view.KeyEvent;
-import android.view.View;
-import android.widget.EditText;
-import android.widget.ImageButton;
-import android.widget.ImageView;
-import android.widget.ListView;
 import android.widget.ProgressBar;
-import android.widget.TextView;
+
 
 
 
@@ -78,6 +64,7 @@ public class TextActivity extends Activity {
     private EditText userTextInput;
     private Context appContext;
     private boolean inConversation;
+    private String rep;
 
 
     private StorageReference storageReference;
@@ -175,9 +162,10 @@ public class TextActivity extends Activity {
         clearTextInput();
     }
 
-    public void bot_response(String user_response) {
+    public String bot_response(String user_response) {
         final String url = "https://pure-stream-52436.herokuapp.com/convo";
         String tag_string_req = "req_login";
+
 
         JSONObject user_det = new JSONObject();
         try {
@@ -196,6 +184,7 @@ public class TextActivity extends Activity {
 
                 try {
                     String bot_reply = response.getString("response");
+                    rep = bot_reply.replace("\n", "");
                     addMessage(new TextMessage(bot_reply.replace("\n", ""), "rx", getCurrentTimeStamp()));
 
                 } catch (JSONException e) {
@@ -218,6 +207,8 @@ public class TextActivity extends Activity {
 
         // Adding request to request queue
         AppController.getInstance().addToRequestQueue(strReq, tag_string_req);
+
+        return rep;
 
     }
 
@@ -351,15 +342,37 @@ public class TextActivity extends Activity {
                         JSONArray items = new JSONArray(bot_reply);
                         for(int i = 0; i< items.length(); i++){
                             JSONObject js = (JSONObject) items.get(i);
-                            addMessage(new TextMessage("DISEASE\n"+js.getString("disease_name"), "rx", getCurrentTimeStamp()));
-                            addMessage(new TextMessage("TREATMENT INFO\n"+js.getString("treatment_info"), "rx", getCurrentTimeStamp()));
+                            addMessage(new TextMessage("Disease::\n"+js.getString("disease_name"), "rx", getCurrentTimeStamp()));
+                            addMessage(new TextMessage("Treatment Info::\n"+js.getString("treatment_info"), "rx", getCurrentTimeStamp()));
                        }
+//                        addMessage(new TextMessage("Would you like to know more about this disease?", "rx", getCurrentTimeStamp()));
+//                        init();
+//                        if(rep!=null && rep.equals("positive")){
+//                            for(int i = 0; i< items.length(); i++){
+//                                JSONObject js = (JSONObject) items.get(i);
+//                                addMessage(new TextMessage("Treatment Info::\n"+js.getString("treatment_info"), "rx", getCurrentTimeStamp()));
+                            //}
+                        //}else{
+                            addMessage(new TextMessage("Click on the hospital button to locate the nearest hospitals.", "rx", getCurrentTimeStamp()));
+                        //}
                     }catch(JSONException e) {
 
                         JSONObject items = new JSONObject(bot_reply);
-
                         addMessage(new TextMessage("DISEASE\n" + items.getString("disease_name"), "rx", getCurrentTimeStamp()));
-                        addMessage(new TextMessage("TREATMENT\n" + items.getString("treatment_info"), "rx", getCurrentTimeStamp()));
+                        //addMessage(new TextMessage("Would you like to know more about this disease?", "rx", getCurrentTimeStamp()));
+                        //EditText usernameEditText = (EditText) findViewById(R.id.userInputEditText);
+                        //String info = usernameEditText.getText().toString();
+//                        while(info.matches("")){
+//
+//                        };
+//                        if(rep!=null && rep.equals("positive")){
+                            addMessage(new TextMessage("TREATMENT\n" + items.getString("treatment_info"), "rx", getCurrentTimeStamp()));
+//                        }else{
+                            addMessage(new TextMessage("Click on the hospital button to locate the nearest hospitals.", "rx", getCurrentTimeStamp()));
+//                        }
+
+
+
                     }
                     progressBar.setVisibility(View.INVISIBLE);
 
