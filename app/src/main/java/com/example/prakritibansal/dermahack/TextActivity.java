@@ -18,6 +18,7 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
@@ -29,6 +30,7 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -36,7 +38,10 @@ import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
 import java.text.DateFormat;
+import java.util.Arrays;
 import java.util.Date;
+import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -299,12 +304,87 @@ public class TextActivity extends Activity {
                 // taskSnapshot.getMetadata() contains file metadata such as size, content-type, and download URL.
                 downloadUrl = taskSnapshot.getDownloadUrl();
                 TextMessage message = new TextMessage(downloadUrl.toString(), "cd", getCurrentTimeStamp());
-
+                diseaseAPI(downloadUrl.toString());
                 addMessage(message);
                 Log.i(TAG, "onSuccess: " + downloadUrl);
             }
         });
 
+    }
+
+    public void diseaseAPI(String image_url){
+        try {
+            TimeUnit.SECONDS.sleep(30);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        final String url = "http://192.168.43.108:8080/diagnose";
+        String tag_string_req = "req_login";
+
+        JSONObject user_det = new JSONObject();
+        try {
+            user_det.put("url", image_url);
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        JsonObjectRequest strReq = new JsonObjectRequest(Request.Method.POST,
+                url, user_det, new Response.Listener<JSONObject>() {
+
+            @Override
+            public void onResponse(JSONObject response) {
+                Log.d("JSON RESPONSE", "Request Response: " + response.toString());
+
+                try {
+                    String bot_reply = response.getString("response");
+                    Log.d("bot_reply", bot_reply);
+                    bot_reply = bot_reply.replace("[", "");
+                    bot_reply = bot_reply.replace("]", "");
+                    Log.d("bot_reply", bot_reply);
+
+                    try{
+                        JSONArray items = new JSONArray(bot_reply);
+                        for(int i = 0; i< items.length(); i++){
+                            JSONObject js = (JSONObject) items.get(i);
+                            addMessage(new TextMessage("DISEASE\n"+js.getString("disease_name"), "rx", getCurrentTimeStamp()));
+                            addMessage(new TextMessage("TREATMENT INFO\n"+js.getString("treatment_info"), "rx", getCurrentTimeStamp()));
+                       }
+                    }catch(JSONException e) {
+
+                        JSONObject items = new JSONObject(bot_reply);
+
+                        addMessage(new TextMessage("DISEASE\n" + items.getString("disease_name"), "rx", getCurrentTimeStamp()));
+                        addMessage(new TextMessage("TREATMENT\n" + items.getString("treatment_info"), "rx", getCurrentTimeStamp()));
+                    }
+
+
+
+                } catch (JSONException e) {
+                    // JSON error
+                    e.printStackTrace();
+                    Toast.makeText(getApplicationContext(), "Json error: " + e.getMessage(), Toast.LENGTH_LONG).show();
+                }
+
+            }
+        }, new Response.ErrorListener() {
+
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.e("url", url);
+                Log.e("ON ERROR RESPONSE", "Request Error: " + error.getMessage());
+
+            }
+        }) {
+        };
+
+        strReq.setRetryPolicy(new DefaultRetryPolicy(
+                20000,
+                DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+
+        // Adding request to request queue
+        AppController.getInstance().addToRequestQueue(strReq, tag_string_req);
     }
 
 
