@@ -82,6 +82,7 @@ public class TextActivity extends Activity {
 
     private StorageReference storageReference;
     private FirebaseStorage firebaseStorage;
+    private ProgressBar progressBar;
     private Uri downloadUrl;
 
     public static final String FILE_NAME = "temp.jpg";
@@ -128,6 +129,8 @@ public class TextActivity extends Activity {
                 startActivity(i);
             }
         });
+
+        progressBar = (ProgressBar) findViewById(R.id.progressBar);
 
         init();
     }
@@ -290,7 +293,7 @@ public class TextActivity extends Activity {
         bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
         byte[] data = baos.toByteArray();
 
-
+        progressBar.setVisibility(View.VISIBLE);
         storageReference = firebaseStorage.getReference().child("images").child(uri.getLastPathSegment());
         UploadTask uploadTask = storageReference.putBytes(data);
         uploadTask.addOnFailureListener(new OnFailureListener() {
@@ -357,8 +360,7 @@ public class TextActivity extends Activity {
                         addMessage(new TextMessage("DISEASE\n" + items.getString("disease_name"), "rx", getCurrentTimeStamp()));
                         addMessage(new TextMessage("TREATMENT\n" + items.getString("treatment_info"), "rx", getCurrentTimeStamp()));
                     }
-
-
+                    progressBar.setVisibility(View.INVISIBLE);
 
                 } catch (JSONException e) {
                     // JSON error
