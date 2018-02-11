@@ -3,7 +3,9 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/DermaHack.iml" filepath="$PROJECT_DIR$/DermaHack.iml" />
+      <module fileurl="file://C:\Users\Dell\Desktop\DermaHack\DermaHack.iml" filepath="C:\Users\Dell\Desktop\DermaHack\DermaHack.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://C:\Users\Dell\Desktop\DermaHack\app\app.iml" filepath="C:\Users\Dell\Desktop\DermaHack\app\app.iml" />
     </modules>
   </component>
 </project>
