@@ -179,7 +179,7 @@ public class TextActivity extends Activity {
 
                 try {
                     String bot_reply = response.getString("response");
-                    addMessage(new TextMessage(bot_reply, "rx", getCurrentTimeStamp()));
+                    addMessage(new TextMessage(bot_reply.replace("\n", ""), "rx", getCurrentTimeStamp()));
 
                 } catch (JSONException e) {
                     // JSON error

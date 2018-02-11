@@ -9,20 +9,23 @@
     <ImageView
         android:layout_width="30dp"
         android:layout_height="30dp"
-        android:background="@mipmap/ic_launcher" />
+        android:background="@mipmap/ic_launcher"
+        android:layout_marginTop="10dp"/>
 
     <TextView
+        android:layout_marginStart="10dp"
         android:id="@+id/editTextUserDetailInput_rx"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@drawable/text_bubble_rx"
         android:gravity="center_vertical"
-        android:paddingLeft="20dp"
-        android:paddingRight="20dp"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
         android:paddingTop="10dp"
         android:paddingBottom="10dp"
         android:layout_marginTop="10dp"
         android:textColor="@color/white"
+        android:text="something here caodkfadkfjadksfj adfkad adkf jakdsfj adkfjakdf"
         android:textStyle="bold" />
 
 </LinearLayout>

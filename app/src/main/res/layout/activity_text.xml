@@ -4,10 +4,8 @@
     android:id="@+id/activity_text"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingBottom="0dp"
-    android:paddingLeft="0dp"
-    android:paddingRight="0dp"
-    android:paddingTop="0dp"
+    android:paddingBottom="10dp"
+    android:paddingTop="10dp"
     android:background ="#FFFFFF">
 
     <include layout="@layout/text_response_content" />

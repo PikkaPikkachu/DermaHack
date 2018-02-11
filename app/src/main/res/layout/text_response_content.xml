@@ -18,7 +18,7 @@
         android:layout_alignParentStart="true"
         android:paddingLeft="20dp"
         android:paddingRight="20dp"
-        android:layout_marginBottom="60dp"/>
+        android:layout_marginBottom="50dp"/>
 
     <LinearLayout
         android:layout_width="fill_parent"
@@ -55,9 +55,17 @@
         <ImageView
             android:id="@+id/fab_selector"
             android:layout_width="30dp"
-            android:layout_height="23dp"
+            android:layout_height="30dp"
             android:layout_marginBottom="10dp"
-            android:src="@drawable/ic_launcher_background" />
+            android:background="@drawable/camera" />
+
+        <ImageView
+            android:id="@+id/map_selector"
+            android:layout_marginStart="2dp"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginBottom="10dp"
+            android:background="@drawable/camera" />
     </LinearLayout>
 
 </RelativeLayout>
