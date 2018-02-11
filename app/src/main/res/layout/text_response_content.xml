@@ -65,7 +65,7 @@
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:layout_marginBottom="10dp"
-            android:background="@drawable/camera" />
+            android:background="@drawable/city" />
     </LinearLayout>
 
 </RelativeLayout>
