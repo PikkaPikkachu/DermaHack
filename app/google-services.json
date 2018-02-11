@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "1010430282595",
+    "firebase_url": "https://dermahack.firebaseio.com",
+    "project_id": "dermahack",
+    "storage_bucket": "dermahack.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1010430282595:android:9521ce2304d10400",
+        "android_client_info": {
+          "package_name": "com.example.prakritibansal.dermahack"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1010430282595-83rcri54b30a9v0qfkv9nmlgvdqvooaq.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.prakritibansal.dermahack",
+            "certificate_hash": "1e1ac0709abbe965fdf0abea801ed6183ce0fcdc"
+          }
+        },
+        {
+          "client_id": "1010430282595-jvnfjgn26s68h2it4iin7vhaqu0lf1rm.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCFOxP1eVMRTMetI3ye56_0RLXmPFXyjzs"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1010430282595-jvnfjgn26s68h2it4iin7vhaqu0lf1rm.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="match_parent">
+
+
+    <!--<Space-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="10dp"-->
+        <!--android:layout_above="@+id/userInputEditText"-->
+        <!--android:id="@+id/space_1"-->
+        <!--android:layout_alignParentStart="true" />-->
+
+    <ListView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/conversationListView"
+        android:layout_alignParentStart="true"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp"
+        android:layout_marginBottom="60dp"/>
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:paddingTop="10dp"
+        android:gravity="bottom"
+        android:weightSum="1"
+        android:id="@+id/user">
+
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="45dp"
+            android:orientation="vertical">
+
+
+            <EditText
+                android:id="@+id/userInputEditText"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:hint="Type a query"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:ems="10"
+                android:inputType="text"
+                android:gravity="bottom"
+                android:layout_marginBottom="2dp"
+                android:maxLines="5"/>
+
+
+        </RelativeLayout>
+
+        <ImageView
+            android:id="@+id/fab_selector"
+            android:layout_width="30dp"
+            android:layout_height="23dp"
+            android:layout_marginBottom="10dp"
+            android:src="@drawable/ic_launcher_background" />
+    </LinearLayout>
+
+</RelativeLayout>
