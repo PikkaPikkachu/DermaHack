@@ -115,6 +115,15 @@ public class TextActivity extends Activity {
             }
         });
 
+        ImageView maps = (ImageView) findViewById(R.id.map_selector);
+        maps.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(TextActivity.this, MapsActivity.class);
+                startActivity(i);
+            }
+        });
+
         init();
     }
 
